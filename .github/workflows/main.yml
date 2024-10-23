@@ -1,0 +1,36 @@
+name: Zomato Web App CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the code in your repository
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # Step 2: Clone external Zomato Web App repository
+    - name: Clone Zomato Web App
+      run: |
+        git clone https://github.com/SreekanthJaladanki/zomato-web-app.git
+        cd zomato-web-app
+
+    # Step 3: Install dependencies (Assuming this is a Node.js project; adjust as needed)
+    - name: Install dependencies
+      run: |
+        cd zomato-web-app
+        npm install
+
+    # Step 4: Run the tests (Assuming `npm test` is the test command)
+    - name: Run tests
+      run: |
+        cd zomato-web-app
+        npm test
