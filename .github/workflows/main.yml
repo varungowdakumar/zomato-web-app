@@ -10,8 +10,18 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        # cache: maven
+    - name: FireFlink suite execution  
+      run: java -jar fireflink-action-1.0.0.jar https://app.fireflink.com SUITE1001 E10C861BB4ED62B91DEAB64A51411AC1A6B98B33634C8C467B2A8DDE85571D0D98D45F22C8CB3C93 praveen.b@fireflink.com Web "&" Mobile
+
+   
     # Step 1: Check out the code in your repository
     - name: Checkout code
       uses: actions/checkout@v2
@@ -35,12 +45,4 @@ jobs:
         npm test
 
         
-    - uses: actions/checkout@v3
-    - name: Set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        # cache: maven
-    - name: FireFlink suite execution  
-      run: java -jar fireflink-action-1.0.0.jar https://app.fireflink.com SUITE1001 E10C861BB4ED62B91DEAB64A51411AC1A6B98B33634C8C467B2A8DDE85571D0D98D45F22C8CB3C93 praveen.b@fireflink.com Web "&" Mobile
+    
